@@ -1,11 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <title>Travel Assistant</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+    select option {
+        background-color: #1e253a !important;
+        color: #e1eaff !important;
+    }
+</style>
+
 </head>
-<body>
-    <h1>Welcome to the Airline Travel Assistant</h1>
+
+<body class="bg-[#0b0e1a] text-white font-['Space_Mono'] flex">
+
+    <!-- SIDEBAR -->
+    <div
+        class="w-56 h-screen fixed left-0 top-0 bg-gradient-to-b from-[#16223b] to-[#0d1426] border-r border-white/10 pt-10 shadow-xl">
+        <div class="text-2xl font-bold ml-5">
+            Ethio<span class="text-red-400">Bangla</span>
+        </div>
+
+        <div class="mt-10 space-y-2">
+            <div class="flex items-center gap-3 px-7 py-4 hover:bg-white/10 cursor-pointer">
+                <i class="fa-solid fa-plane text-blue-300"></i> Flights
+            </div>
+            <div class="flex items-center gap-3 px-7 py-4 hover:bg-white/10 cursor-pointer">
+                <i class="fa-solid fa-hotel text-blue-300"></i> Hotels
+            </div>
+            <div class="flex items-center gap-3 px-7 py-4 hover:bg-white/10 cursor-pointer">
+                <i class="fa-solid fa-car text-blue-300"></i> Car Rentals
+            </div>
+            <div class="flex items-center gap-3 px-7 py-4 hover:bg-white/10 cursor-pointer">
+                <i class="fa-solid fa-map text-blue-300"></i> Explore
+            </div>
+            <div class="flex items-center gap-3 px-7 py-4 hover:bg-white/10 cursor-pointer">
+                <i class="fa-solid fa-heart text-blue-300"></i> Saved Trips
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="flex-1 ml-56 p-10">
+
+        <!-- HERO CAROUSEL -->
+        <div class="relative w-full h-72 rounded-xl overflow-hidden shadow-2xl mb-16">
+            <div class="hero-slide absolute inset-0 bg-cover bg-center opacity-100 transition-all duration-700"
+                style="background-image: url('images/biman.png');"></div>
+            <div class="hero-slide absolute inset-0 bg-cover bg-center opacity-0 transition-all duration-700"
+                style="background-image: url('images/et.png');"></div>
+
+            <div class="absolute inset-0 bg-gradient-to-br from-black/50 to-black/20"></div>
+        </div>
+
+        <!-- HERO TITLE -->
+        <div
+            class="bg-white/10 backdrop-blur-xl border border-white/10 p-10 rounded-xl shadow-xl w-[95%] mx-auto mb-10">
+            <h1 class="text-3xl font-bold mb-2">Find Your Next Adventure</h1>
+            <p class="text-blue-200">Explore flights, hotels, and destinations across the globe.</p>
+        </div>
+
+        <!-- SEARCH CONTAINER -->
+        <div class="bg-[#141a2a] border border-white/10 p-10 rounded-xl w-[95%] mx-auto shadow-2xl">
+
+            <!-- Search Top -->
+            <div class="flex items-center gap-6 mb-10">
+
+                <!-- Trip Type Dropdown -->
+                <div class="relative bg-[#1e253a] border border-[#2b3550] rounded-lg px-4 py-3">
+                    <select id="tripTypeSelect"
+                        class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
+                        <option value="round">Round trip</option>
+                        <option value="oneway">One way</option>
+                    </select>
+                    <i
+                        class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-200 pointer-events-none"></i>
+                </div>
+
+                <!-- Travelers -->
+                <div class="relative bg-[#1e253a] border border-[#2b3550] rounded-lg px-4 py-3">
+                    <select class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
+                        <option>1 traveler</option>
+                        <option>2 travelers</option>
+                        <option>3 travelers</option>
+                    </select>
+                    <i
+                        class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-200 pointer-events-none"></i>
+                </div>
+
+                <!-- Class -->
+                <div class="relative bg-[#1e253a] border border-[#2b3550] rounded-lg px-4 py-3">
+                    <select class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
+                        <option>Economy</option>
+                        <option>Business</option>
+                        <option>First Class</option>
+                    </select>
+                    <i
+                        class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-200 pointer-events-none"></i>
+                </div>
+            </div>
+
+            <!-- SEARCH GRID -->
+            <div class="grid grid-cols-4 gap-4">
+                <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
+                    <i class="fa-solid fa-location-dot text-blue-300"></i>
+                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="From" />
+                </div>
+
+                <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
+                    <i class="fa-solid fa-plane text-blue-300"></i>
+                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="To" />
+                </div>
+
+                <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
+                    <i class="fa-solid fa-calendar text-blue-300"></i>
+                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="Departure" />
+                </div>
+
+                <div id="returnField"
+                    class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
+                    <i class="fa-solid fa-calendar text-blue-300"></i>
+                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="Return" />
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DESTINATIONS -->
+        <div class="mt-16 w-[95%] mx-auto">
+            <h2 class="text-2xl mb-6">Explore</h2>
+
+            <div class="grid grid-cols-3 gap-6">
+
+                <div class="bg-[#1a2233] rounded-xl overflow-hidden shadow-2xl hover:scale-105 transition">
+                    <img src="images/paris.jpg" class="w-full h-40 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg">Paris</h3>
+                        <p class="text-blue-200">From $499 round trip</p>
+                    </div>
+                </div>
+
+                <div class="bg-[#1a2233] rounded-xl overflow-hidden shadow-2xl hover:scale-105 transition">
+                    <img src="images/hawaii.png" class="w-full h-40 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg">Hawaii</h3>
+                        <p class="text-blue-200">From $699 round trip</p>
+                    </div>
+                </div>
+
+                <div class="bg-[#1a2233] rounded-xl overflow-hidden shadow-2xl hover:scale-105 transition">
+                    <img src="images/tokyo.png" class="w-full h-40 object-cover" />
+                    <div class="p-4">
+                        <h3 class="text-lg">Tokyo</h3>
+                        <p class="text-blue-200">From $799 round trip</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
+
 </html>
