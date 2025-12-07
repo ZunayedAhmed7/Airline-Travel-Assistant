@@ -64,11 +64,15 @@
             <div class="absolute inset-0 bg-gradient-to-br from-black/50 to-black/20"></div>
         </div>
 
-        <!-- HERO TITLE -->
-        <div
-            class="bg-white/10 backdrop-blur-xl border border-white/10 p-10 rounded-xl shadow-xl w-[95%] mx-auto mb-10">
-            <h1 class="text-3xl font-bold mb-2">Find Your Next Adventure</h1>
-            <p class="text-blue-200">Explore flights, hotels, and destinations across the globe.</p>
+        <!-- ITINERARY SECTION -->
+        <div id="itinerarySection" class="hidden bg-white/10 backdrop-blur-xl border border-white/10 p-6 rounded-xl shadow-xl w-[95%] mx-auto mb-10">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold">Your Itinerary</h2>
+                <button id="clearItinerary" class="text-red-400 hover:text-red-300 text-sm">
+                    <i class="fa-solid fa-trash mr-1"></i>Clear
+                </button>
+            </div>
+            <div id="selectedFlights" class="space-y-3"></div>
         </div>
 
         <!-- SEARCH CONTAINER -->
@@ -81,8 +85,8 @@
                 <div class="relative bg-[#1e253a] border border-[#2b3550] rounded-lg px-4 py-3">
                     <select id="tripTypeSelect"
                         class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
-                        <option value="round">Round trip</option>
-                        <option value="oneway">One way</option>
+                        <option value="1">Round trip</option>
+                        <option value="2">One way</option>
                     </select>
                     <i
                         class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-200 pointer-events-none"></i>
@@ -90,10 +94,11 @@
 
                 <!-- Travelers -->
                 <div class="relative bg-[#1e253a] border border-[#2b3550] rounded-lg px-4 py-3">
-                    <select class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
-                        <option>1 traveler</option>
-                        <option>2 travelers</option>
-                        <option>3 travelers</option>
+                    <select id="adultsSelect" class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
+                        <option value="1">1 traveler</option>
+                        <option value="2">2 travelers</option>
+                        <option value="3">3 travelers</option>
+                        <option value="4">4 travelers</option>
                     </select>
                     <i
                         class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-200 pointer-events-none"></i>
@@ -101,10 +106,11 @@
 
                 <!-- Class -->
                 <div class="relative bg-[#1e253a] border border-[#2b3550] rounded-lg px-4 py-3">
-                    <select class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
-                        <option>Economy</option>
-                        <option>Business</option>
-                        <option>First Class</option>
+                    <select id="classSelect" class="bg-transparent outline-none text-blue-100 pr-6 cursor-pointer appearance-none">
+                        <option value="1">Economy</option>
+                        <option value="2">Premium Economy</option>
+                        <option value="3">Business</option>
+                        <option value="4">First Class</option>
                     </select>
                     <i
                         class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-blue-200 pointer-events-none"></i>
@@ -112,28 +118,43 @@
             </div>
 
             <!-- SEARCH GRID -->
-            <div class="grid grid-cols-4 gap-4">
-                <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
-                    <i class="fa-solid fa-location-dot text-blue-300"></i>
-                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="From" />
-                </div>
+            <form id="flightSearchForm">
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl relative">
+                        <i class="fa-solid fa-location-dot text-blue-300"></i>
+                        <input id="departureInput" class="bg-transparent outline-none text-blue-50 w-full" placeholder="From (e.g., JFK)" required autocomplete="off" />
+                        <div id="departureDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-[#1e253a] border border-[#2b3550] rounded-lg max-h-60 overflow-y-auto z-50 shadow-xl"></div>
+                    </div>
 
-                <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
-                    <i class="fa-solid fa-plane text-blue-300"></i>
-                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="To" />
-                </div>
+                    <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl relative">
+                        <i class="fa-solid fa-plane text-blue-300"></i>
+                        <input id="arrivalInput" class="bg-transparent outline-none text-blue-50 w-full" placeholder="To (e.g., LAX)" required autocomplete="off" />
+                        <div id="arrivalDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-[#1e253a] border border-[#2b3550] rounded-lg max-h-60 overflow-y-auto z-50 shadow-xl"></div>
+                    </div>
 
-                <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
-                    <i class="fa-solid fa-calendar text-blue-300"></i>
-                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="Departure" />
-                </div>
+                    <div class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
+                        <i class="fa-solid fa-calendar text-blue-300"></i>
+                        <input id="departureDate" type="date" class="bg-transparent outline-none text-blue-50 w-full" placeholder="Departure" required />
+                    </div>
 
-                <div id="returnField"
-                    class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
-                    <i class="fa-solid fa-calendar text-blue-300"></i>
-                    <input class="bg-transparent outline-none text-blue-50 w-full" placeholder="Return" />
+                    <div id="returnField"
+                        class="flex items-center gap-3 bg-[#1e253a] border border-[#2b3550] p-4 rounded-xl">
+                        <i class="fa-solid fa-calendar text-blue-300"></i>
+                        <input id="returnDate" type="date" class="bg-transparent outline-none text-blue-50 w-full" placeholder="Return" />
+                    </div>
                 </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition duration-300 shadow-lg">
+                    <i class="fa-solid fa-magnifying-glass mr-2"></i> Search Flights
+                </button>
+            </form>
+            
+            <div id="loadingIndicator" class="hidden mt-6 text-center">
+                <i class="fa-solid fa-spinner fa-spin text-3xl text-blue-400"></i>
+                <p class="mt-2 text-blue-300">Searching for flights...</p>
             </div>
+            
+            <div id="flightResults" class="mt-8"></div>
 
         </div>
 
